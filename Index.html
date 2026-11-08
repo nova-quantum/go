@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Aplikasi Terpadu - UPTD Puskesmas Kota Baru</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      /* ================================================================= */
+      /* UBAH LINK GAMBAR DI BAWAH INI SECARA MANUAL SESUAI KEINGINAN ANDA */
+      /* ================================================================= */
+      --bg-page-url: url('https://cdn.phototourl.com/member/2026-11-07-bdf89d4d-588e-45ed-86bd-04dde8173432.png'); /* Link Gambar Latar Halaman Utama */
+      --bg-card-url: url('https://cdn.phototourl.com/member/2026-11-05-5d8b678c-c1b7-49d1-9587-bb85a856e24e.jpg'); /* Link Gambar Latar Kotak Kartu Modul */
+      
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border: rgba(226, 232, 240, 0.8);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    /* Latar Belakang Halaman Utama */
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background-image: linear-gradient(rgba(248, 250, 252, 0.5), rgba(248, 250, 252, 0.5)), var(--bg-page-url);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header & Hero Section */
+    .hero {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(37, 99, 235, 0.9) 100%);
+      color: white;
+      padding: 50px 20px 40px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-container {
+      max-width: 950px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .logo-wrapper {
+      flex-shrink: 0;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      background: transparent;
+    }
+
+    .hero-content {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      line-height: 1.3;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      color: #93c5fd;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      font-weight: 500;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    /* Quick Links Bar di dalam Hero */
+    .quick-links-wrapper {
+      max-width: 950px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .quick-link-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(4px);
+      transition: all 0.2s ease;
+    }
+
+    .quick-link-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Ukuran gambar ikon pada Quick Links */
+    .quick-link-btn img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      border-radius: 3px;
+    }
+
+    /* Main Container */
+    .container { 
+      max-width: 1140px; 
+      margin: 40px auto; 
+      padding: 0 20px;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    /* Grid Layout */
+    .grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+      gap: 24px; 
+    }
+
+    /* Card Design dengan Gambar Latar */
+    .card { 
+      background-image: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), var(--bg-card-url);
+      background-size: cover;
+      background-position: center;
+      backdrop-filter: blur(8px);
+      padding: 24px; 
+      border-radius: 16px; 
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm); 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover { 
+      transform: translateY(-5px); 
+      box-shadow: var(--shadow-lg); 
+      border-color: #cbd5e1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .icon-wrapper {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .icon-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .card h3 { 
+      font-size: 1.1rem; 
+      font-weight: 600; 
+      color: var(--text-main); 
+    }
+
+    .card p { 
+      color: var(--text-muted); 
+      font-size: 0.88rem; 
+      line-height: 1.5; 
+      flex-grow: 1; 
+      margin-bottom: 20px;
+    }
+
+    .btn { 
+      display: inline-flex; 
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px; 
+      background: var(--primary); 
+      color: #fff; 
+      text-decoration: none; 
+      border-radius: 10px; 
+      font-weight: 600; 
+      font-size: 0.88rem;
+      transition: background 0.2s ease; 
+      width: 100%;
+    }
+
+    .btn:hover { background: var(--primary-hover); }
+
+    .btn.disabled {
+      background: #e2e8f0;
+      color: #94a3b8;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Skeleton Loader */
+    .skeleton {
+      background: linear-gradient(90deg, rgba(255,255,255,0.6) 25%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.6) 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-card {
+      height: 180px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      margin-top: auto;
+    }
+
+    /* Responsif untuk layar kecil */
+    @media (max-width: 768px) {
+      .hero-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-container">
+      <!-- Logo Kiri -->
+      <div class="logo-wrapper">
+        <img src="https://cdn.phototourl.com/member/2026-10-30-79172268-51ba-465e-945e-825c1b9eb93a.jpg" alt="Logo Kiri">
+      </div>
+
+      <!-- Judul & Subjudul -->
+      <div class="hero-content">
+        <h1>DATA CENTER APLIKASI TERPADU</h1>
+        <h1>UPTD PUSKESMAS KOTA BARU</h1>
+        <p>Contact Person WA : 082341119401 | Email : ikapratama0@gmail.com</p>
+        <p>© DH-Nexus | Stable Version 2.0.27.09.24</p>
+      </div>
+
+      <!-- Logo Kanan -->
+      <div class="logo-wrapper">
+        <img src="https://cdn.phototourl.com/member/2026-10-30-f4823f8f-e0fd-4db5-be14-4ada7088af98.png" alt="Logo Kanan">
+      </div>
+    </div>
+
+    <!-- Pintasan Tautan Web (Quick Links) dengan ikon URL foto -->
+    <div class="quick-links-wrapper" id="quickLinksContainer"></div>
+  </div>
+
+  <div class="container">
+    <div id="module-grid" class="grid">
+      <!-- Skeleton Loaders -->
+      <div class="skeleton-card skeleton"></div>
+      <div class="skeleton-card skeleton"></div>
+      <div class="skeleton-card skeleton"></div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Web App Developer | Hersaputra Ika Pratama. HR. All Rights Reserved
+  </footer>
+
+  <script>
+    // ----------------------------------------------------
+    // DAFTAR PINTASAN TAUTAN WEB (Quick Links) DENGAN ICON URL FOTO
+    // ----------------------------------------------------
+    const quickLinks = [
+      { name: "ASN Digital BKN", url: "https://asndigital.bkn.go.id", iconUrl: "https://cdn.phototourl.com/member/2026-11-08-a024a5cb-6076-44e0-8240-b29adbf72472.png" },
+      { name: "Srikandi Arsip", url: "https://srikandi.arsip.go.id", iconUrl: "https://cdn.phototourl.com/member/2026-11-08-e6ea1008-d59c-4bb5-8d3b-578a14f50e8b.png" },
+      { name: "E-Puskesmas Inhil", url: "https://indragirihilir.epuskesmas.id/login", iconUrl: "https://cdn.phototourl.com/member/2026-11-05-aea7ca00-962a-4866-8e26-0f85aa02422c.jpg" },
+      { name: "PCare BPJS E-Claim", url: "https://pcarejkn.bpjs-kesehatan.go.id/eclaim/login", iconUrl: "https://cdn.phototourl.com/member/2026-11-05-5ecb39c3-fd91-404c-8e04-383cb9eb138a.png" },
+      { name: "Kessan BPJS", url: "https://kesan.bpjs-kesehatan.go.id/kessan/survey/search/ew0KImtkcHBrIjogIjA0MDYwNzAxIiwNCiJubXBwayI6ICJQVUtFU01BUyBLT1RBIEJBUlUiLA0KImtkZGF0aTIiOiAiMDA1OSINCn0", iconUrl: "https://cdn.phototourl.com/member/2026-11-05-5ecb39c3-fd91-404c-8e04-383cb9eb138a.png" },
+       { name: "Bsre Kominfo", url: "https://bsre.bssn.go.id/", iconUrl: "https://cdn.phototourl.com/member/2026-11-05-3992faa3-0b6f-4303-aafa-40c6d158ac82.png" },
+       { name: "Portal Inhilkab", url: "https://inhilkab.go.id/", iconUrl: "https://cdn.phototourl.com/member/2026-11-08-909db58d-0c67-4a0e-890d-29d6791cc78e.png" },
+       { name: "Website Puskesmas", url: "https://datamasterpkmkotabaru.blogspot.com/", iconUrl: "https://cdn.phototourl.com/member/2026-11-08-f5ec5730-4a8c-4980-a8dd-e09a54fc3093.png" },
+      { name: "Email Inhilkab", url: "http://email.inhilkab.go.id/", iconUrl: "https://cdn.phototourl.com/member/2026-11-08-62319879-c9fd-4e0a-91e5-f5ec9176dc79.png" }
+    ];
+
+    const linksContainer = document.getElementById('quickLinksContainer');
+    quickLinks.forEach(link => {
+      const a = document.createElement('a');
+      a.href = link.url;
+      a.target = "_blank";
+      a.className = "quick-link-btn";
+      a.innerHTML = `<img src="${link.iconUrl}" alt="${link.name}"> ${link.name} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.7;"></i>`;
+      linksContainer.appendChild(a);
+    });
+
+    // ----------------------------------------------------
+    // FUNGSI IKON BAWAAN MODUL (FontAwesome Fallback)
+    // ----------------------------------------------------
+    function getModuleIcon(name) {
+      const lower = name.toLowerCase();
+      if (lower.includes('rns')) return 'fa-file-lines';
+      if (lower.includes('rujukan') || lower.includes('e-sign')) return 'fa-file-signature';
+      if (lower.includes('sip') || lower.includes('izin')) return 'fa-id-card';
+      if (lower.includes('pegawai') || lower.includes('kepegawaian')) return 'fa-users';
+      if (lower.includes('keur') || lower.includes('sehat')) return 'fa-heart-pulse';
+      if (lower.includes('sakit')) return 'fa-notes-medical';
+      if (lower.includes('inventaris')) return 'fa-boxes-stacked';
+      if (lower.includes('penyakit')) return 'fa-virus';
+      if (lower.includes('profil') || lower.includes('puskesmas')) return 'fa-hospital';
+      return 'fa-grid-2';
+    }
+
+    // ----------------------------------------------------
+    // RENDER MODUL DARI GOOGLE APPS SCRIPT / BACKEND
+    // ----------------------------------------------------
+    function renderModules(modules) {
+      const grid = document.getElementById('module-grid');
+      grid.innerHTML = '';
+
+      if (modules.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">Modul tidak ditemukan.</p>`;
+        return;
+      }
+
+      modules.forEach(mod => {
+        const hasUrl = mod.url && mod.url.trim() !== "";
+        
+        // Cek apakah modul memiliki custom link gambar logo (iconUrl dari backend/Config)
+        let iconHtml = '';
+        if (mod.iconUrl && mod.iconUrl.trim() !== "") {
+          iconHtml = `<img src="${mod.iconUrl}" alt="${mod.name}">`;
+        } else {
+          iconHtml = `<i class="fa-solid ${getModuleIcon(mod.name)}"></i>`;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div>
+            <div class="card-header">
+              <div class="icon-wrapper">
+                ${iconHtml}
+              </div>
+              <h3>${mod.name}</h3>
+            </div>
+            <p>${mod.description}</p>
+          </div>
+          <a href="${hasUrl ? mod.url : '#'}" ${hasUrl ? 'target="_blank"' : ''} class="btn ${hasUrl ? '' : 'disabled'}">
+            ${hasUrl ? 'Buka Aplikasi <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>' : 'Coming Soon'}
+          </a>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    google.script.run
+      .withSuccessHandler(function(modules) {
+        renderModules(modules);
+      })
+      .getModuleList();
+  </script>
+</body>
+</html>
